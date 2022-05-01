@@ -58,7 +58,7 @@ It is the second differential and can be denoted $\dd[2]{f}$. If it's differenti
 And we can continue applying it by induction.
 
 \begin{thr}[Symmetricity of differential form]
-    If $\exists \dd[n]{f}(x)$ and is continuous, than the order of its arguments doesn't matter.
+    If $\exists \dd[n]{f}(x)$ and is continuous, then the order of its arguments doesn't matter.
 \end{thr}
 \begin{proof}
     Let's use the form of directed derivative and consider $n = 2$. So we want to prove that:
@@ -76,4 +76,16 @@ And we can continue applying it by induction.
 
 \end{proof}
 
+\section*{Relation of differential to the partial derivatives}
+Consider $f: \R^n \to \R$, its $\dd[n]{f}$ is a polylinear map, therefore can be expressed as:
+\[ \dd[n]{f}(x)(h_1 \dots h_n) = \sum\limits_{1 \leqslant j_1 \dots j_n \leqslant n} \dd[n]{f}(x)(e_{j_1} \dots e_{j_n}) h_1^{(j_1)} \dots h_n^{(j_n)} \]
+From that we get that $n$-th differential is a polylinear map and its coefficients are the partial derivatives.
+
+\section*{Taylor formula}
+Again, $f: \R^m \to \R, f\in C^{n+1}[x, x + h]$, then (here $\dd[k]{f}(x) h^k$ means substitution of $k$ entries of $h$):
+\[ f(x + h) = f(x) + \sum\limits_{k=1}^n \frac{\dd[k]{f}(x) h^k}{k!} + \frac{\dd[n + 1]{f}(x + \theta h)h^{k + 1}}{(k + 1)!} \]
+\begin{proof}
+\[\varphi(t) = f(x + th), \varphi \in C^{n+1}[0, 1]\]
+\[\varphi(1) = \varphi(0) + \sum\limits_{k=1}^n \frac{\varphi^{(k)}(0)}{k!} + \frac{\varphi{(k+1)}(\theta)}{(k + 1)!} \]
+\end{proof}
 \end{document}
