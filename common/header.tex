@@ -5,7 +5,9 @@
 \setmainfont{XCharter}
 \usepackage{xcharter-otf}
 \setlength{\parindent}{0pt}
-
+% Images
+\usepackage[dvips,xetex]{graphicx}
+\graphicspath{ {./data/} }
 % Spaces after sentence ends
 \frenchspacing
 % Advanced coloring
@@ -30,6 +32,7 @@
 \providecommand{\F}{\mathbb F}
 \providecommand{\Q}{\mathbb Q}
 \providecommand{\bigO}{\mathcal O}
+\providecommand{\go}[1]{\url{#1.pdf}}
 % Code listings
 \usepackage{minted}
 \providecommand{\mnt}[1]{\mintinline{python}{#1}}
