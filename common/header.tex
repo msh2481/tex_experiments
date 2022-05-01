@@ -3,7 +3,7 @@
 % Cyrillic support
 \usepackage{polyglossia}
 \setmainfont{XCharter}
-\usepackage{xcharter-otf}
+% \usepackage{xcharter-otf}
 \setlength{\parindent}{0pt}
 % Images
 \usepackage[dvips,xetex]{graphicx}
@@ -19,11 +19,11 @@
 	urlcolor=cyan
 }
 % Math environments
-\newtheorem{uprz}{\color{violet!100!black} Упражнение}
-\newtheorem{thr}{Теорема}
-\newtheorem{stat}{Утверждение}
-\newtheorem{alg}{Алгоритм}
+\usepackage{amsthm,amssymb}
+\newtheorem{thr}{Th.}
+\newtheorem{alg}{Alg.}
 % One-symbol defines with mathbb
+\usepackage{amsfonts}
 \providecommand{\N}{\mathbb N}
 \providecommand{\Z}{\mathbb Z}
 \providecommand{\P}{\mathbb P}
@@ -33,6 +33,16 @@
 \providecommand{\Q}{\mathbb Q}
 \providecommand{\bigO}{\mathcal O}
 \providecommand{\go}[1]{\url{#1.pdf}}
+\renewcommand{\N}{\mathbb N}
+\renewcommand{\Z}{\mathbb Z}
+\renewcommand{\P}{\mathbb P}
+\renewcommand{\R}{\mathbb R}
+\renewcommand{\C}{\mathbb C}
+\renewcommand{\F}{\mathbb F}
+\renewcommand{\Q}{\mathbb Q}
+\renewcommand{\bigO}{\mathcal O}
+\renewcommand{\go}[1]{\url{#1.pdf}}
+\usepackage{physics}
 % Code listings
 \usepackage{minted}
 \providecommand{\mnt}[1]{\mintinline{python}{#1}}

@@ -1,0 +1,79 @@
+\input{common/header}
+\title{Higher derivatives}
+\author{}
+\date{01 May 2022}
+\begin{document}
+\maketitle
+\section*{Simplest case: $\R^m \to \R$}
+Consider $f: \R^m \to \R$, differentiable on $\R^m$. Then $\exists \pdv{x_i}: \R^m \to \R$.
+If it's again differentiable, $\exists \pdv{x_j} \pdv {x_i}: \R^m \to \R$. And so on.
+
+$ \frac{\partial^p f}{\partial x_{i_1} \dots \partial x_{i_p}} $ denotes the derivative of $p$-th order.
+
+\begin{thr}[Order of differentiation]
+     If $\pdv{f}{x_i}{x_j}, \pdv{f}{x_i}{x_j}$ 
+    exist in a neighborhood and are continuous, they are equal.
+\end{thr}
+\begin{proof}
+    For simplicity, $i = 1, j = 2, m = 2$. Also consider the discrete derivative:
+    \[F(h_1, h_2) = (f(x_1 + h_1, x_2 + h_2) - f(x_1 + h_1, x_2)) - (f(x_1, x_2 + h_2) - f(x_1, x_2))\]
+    And another helper function:
+    \[ \varphi(t) = f(x_1 + h_1, x_2 + th_2) - f(x_1, x_2 + th_2) \]
+    Let's use mean value theorem along $x_2$:
+    \[ F(h_1, h_2) = \varphi(1) - \varphi(0) = \varphi'(\theta_2) \]
+    \[ \varphi'(t) = h_2(\pdv{f}{x_2}\/(x_1 + h_1, x_2 + th2) - \pdv{f}{x_2}\/(x_1, x_2 th2)) \]
+    Now use it again along $x_1$:
+    \[\varphi'(t) = h_1 h_2 \pdv{f}{x_1}{x_2}(x_1 + \theta_1 h_1, x_2 + \theta_2 h_2) \]
+    \[ F(h_1, h_2) = h_1 h_2 \pdv{f}{x_1}{x_2}(x_1 + \theta_1 h_1, x_2 + \theta_2 h_2), \exists \theta_1, \theta_2 \in (0, 1) \]
+    \[ \lim\limits_{h\to 0} \frac{F(h_1, h_2)}{h_1 h_2} = \pdv{f}{x_1}{x_2}\/(x) \text{ (by continuity of } \pdv{f}{x_1}{x_2} \text{)}\]
+    Similarly, we can do it in other order and get:
+    \[ \lim\limits_{h\to 0} \frac{F(h_1, h_2)}{h_1 h_2} = \pdv{f}{x_2}{x_1}\/(x) \]
+\end{proof}
+
+\begin{thr}[Order of differentiation, corollary]
+    If a function has continuous derivatives of $n$-th order, they don't depend on the order of differentiation.
+\end{thr}
+\begin{proof}
+    Suppose there are two orders for which the results differ, and the differnce consists of swapping two neighbors. 
+    All other permutations can be derived from it.
+    
+    We can remove their common prefix, because after differentiating it we got the same functions. Here we apply the previous theorem, so 
+    we get the same functions again. And that remains is their suffixes, which are equal too.
+\end{proof}
+
+\section*{More complicated case: $X \to Y$}
+Consider $f: X \to Y$, differentiable on $X$. Then $\exists \dd{f}: X \to L(X, Y)$.
+If it's again differentiable, $\exists \dd(\dd{f}): X \to L(X, X, Y)$ (or $L(X, L(X, Y))$). 
+It is the second differential and can be denoted $\dd[2]{f}$. If it's differentiable too we can go on further.
+
+\begin{thr}[Relation of the first differential to directed derivatives]
+    \[\dd{f}(x)h = \pdv{f}{h}\/(x) = \lim\limits_{t \to 0} \frac{f(x + th) - f(x)}{t}\]
+\end{thr}
+
+\begin{thr}[Relation of the second differential to directed derivatives]
+    \[\dd[2]{f}(x)(h_1, h_2) = \dd(\dd{f})(x)(h_1, h_2) = (\pdv{h_1}(\dd{f}))(x)(h_2) \]
+    \[ = \qty(\lim\limits_{t \to 0} \frac{\dd{f}(x + th_1) - \dd{f}(x)}{t})(h_2) = \lim\limits_{t \to 0} \frac{\dd{f}(x + th_1)h_2 - \dd{f}(x)h_2}{t} \]
+    \[ = \lim\limits_{t \to 0} \frac{\pdv{f}{h_2}(x+th_1) - \pdv{f}{h_2}(x)}{t} = \pdv{h_1}\qty(\pdv{f}{h_2})(x) \]
+\end{thr}
+And we can continue applying it by induction.
+
+\begin{thr}[Symmetricity of differential form]
+    If $\exists \dd[n]{f}(x)$ and is continuous, than the order of its arguments doesn't matter.
+\end{thr}
+\begin{proof}
+    Let's use the form of directed derivative and consider $n = 2$. So we want to prove that:
+    \[ \pdv{h_1} \pdv{h_2} f(x) = \pdv{h_2} \pdv{h_1} f(x) \]
+    Again let's introduce some helper functions:
+    \[ F(h_1, h_2, t) = f(x + th_1 + th_2) - f(x + th_1) - f(x + th_2) + f(x) \] 
+    \[ \varphi(v) = f(x + th_1 + tv) - f(x + tv), v \in [0, h_2] \] 
+    \[ F(h_1, h_2, t) = \varphi(h_2) - \varphi(0) \]
+    Now we'll show $\norm{F(h_1, h_2, t) - t^2 \dd[2]{f}(x)(h_1, h_2)} = o(1)$:
+    \[ \norm{\varphi(h_2) - \varphi(0) - t^2 \dd[2]{f}(x)(h_1)(h_2)} \leqslant
+      \sup\limits_{\theta_2 \in (0, 1)} \norm{\dd{\varphi(\theta_2 h_2) - t^2\dd[2]{f}(x)(h_1)} } \norm{h_2} = \dots \]
+    \[ \qty( \dd{\varphi}(\theta_2 h_2) = t(\dd{f}(x + th_1 + t \theta_2 h_2) - \dd{f}(x + t \theta_2 h_2)) ) \] 
+    \[ \dots = \abs{t}\norm{h_2} \sup \norm{\dd{f}(x + \theta_2 h_2 t + th_1) - \dd{f}(x + \theta_2 h_2 t) - t \dd[2]{f}(x)(h_1)} \leqslant \]
+    \[ \abs{t}\norm{h_2} \sup \sup \norm{ \dd[2]{f}(x + \theta_2 h_2 + \theta_1 h_1) - \dd[2]{f}(x)}\norm{th_1} = o(t^2) \]
+
+\end{proof}
+
+\end{document}
