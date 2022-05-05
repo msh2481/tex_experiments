@@ -13,12 +13,6 @@
 \frenchspacing
 % Advanced coloring
 \usepackage{xcolor}
-\usepackage{hyperref}
-\hypersetup{
-	linkcolor=.,
-	colorlinks=true,
-	urlcolor=cyan
-}
 % Math environments
 \usepackage{amsthm}
 % \usepackage{amssymb}
@@ -43,8 +37,14 @@
 \renewcommand{\F}{\mathbb F}
 \renewcommand{\Q}{\mathbb Q}
 \renewcommand{\bigO}{\mathcal O}
-\renewcommand{\go}[1]{\href{#1.pdf}{#1}}
 \usepackage{physics}
 % Code listings
 \usepackage{minted}
+\usepackage{hyperref}
+\hypersetup{
+	linkcolor=.,
+	colorlinks=true,
+	urlcolor=cyan
+}
+\renewcommand{\go}[1]{\href{#1.pdf}{#1}}
 \providecommand{\mnt}[1]{\mintinline{python}{#1}}
