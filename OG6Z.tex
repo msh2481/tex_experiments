@@ -1,0 +1,117 @@
+\input{common/header}
+\title{Implicit and inverse function theorem}
+\author{}
+\date{05 May 2022}
+\begin{document}
+\maketitle
+
+\begin{thr}[Implicit function theorem]
+$X, Y, Z$ --- normed.
+\end{thr}
+
+\subsection*{Basic example}
+\[ \begin{cases}
+    g_1(x_1 \dots x_m, y_1 \dots y_n) = 0\\
+    \dots \\
+    g_n(x_1 \dots x_m, y_1 \dots y_n) = 0\\
+\end{cases} \]
+\[ \leftrightarrow \] 
+\[ \begin{cases}
+    y_1 = f_1(x_1 \dots x_m)\\
+    \dots \\
+    y_n = f_1(x_1 \dots x_m)\\
+\end{cases} \]
+It's a surface with dimension $m$ (because every point is determined by it's $x$ coordinates) in $\R^{n+m}$.
+
+\begin{thr}
+$Y$ --- complete normed space, $U \in L(Y, Y)$, $\norm{U} < 1$, I --- identity\\
+$ \to \exists (I - U)^{-1} \in L(Y, Y) $
+\end{thr}
+\begin{proof} First proof.
+
+\par Existence.
+
+Want to prove that $\forall u \in Y \exists y \in Y: (I - U)y =  u$.
+\[ y_{n+1} = u + Uy_n \] 
+\[ y_{n+1} - y_n = Uy_n - Uy_{n-1} \] 
+\[ \norm{ y_{n+1} - y_n } = \norm{U(y_n - y_{n-1})} \leqslant \norm{U}\norm{y_n - y_{n-1}} \] 
+If we iterate this squeeze mapping, we will get the unique solution $y_0$.
+
+\par Continuity.
+
+\[ y_n \to y_0 \] 
+\[ (I - U)y_n = u_n \to u_0 \] 
+???
+
+\end{proof}
+
+\begin{proof} Second proof. 
+
+\[ (I - U)^{-1} = I + U + U^2 + \dots \] 
+
+This series converges absolutely, i.e. $\sum \norm{U^k} \leqslant \frac{1}{1 - \norm{U}}$ converges.
+
+$L(Y, Y)$ is complete (link?), so every Cauchy sequence converges. And absolutely converging series are Cauchy sequences.
+
+Now, consider $S$:
+\[ S_n = I + U + \dots + U^n \to S \in L(Y, Y) \] 
+\[ S_n(I - U) = (I - U)S_n = I - U^{n+1} \to I \] 
+\[ S(I - U)  = (I - U)S = I \to S = (I - U)^{-1} \]
+
+\end{proof}
+
+\begin{thr} 
+    \[ U \in L(Y, Z), \exists U^{-1} \in L(Z, Y) \forall V \in L(Y, Z) \] 
+    $Y$ --- complete
+    \[ \norm{V} < \frac{1}{\norm{U^{-1}}} \to \exists (U \pm V)^{-1} \in L(Z, Y) \]
+\end{thr}
+\begin{proof}
+    \[ U + V = U(I_y)\]
+\end{proof}
+
+\begin{thr}
+    As Th. 1, but require continuity of $G$ and $\dd{G}$ not only in the point,
+    but in a nenighborhood. Then $f$ will be continuous in a nenighborhood of $x_0$.
+\end{thr}
+
+\begin{proof}
+    If $(x_1, y_1)$ is 
+\end{proof}
+
+\begin{thr}
+    As Th. 1, but $\exists \dd{G}$ then $\exists \dd{f}$ and:
+    \[ \dd{f}\/(x_0) = -(\pdv{y} G(x_0, y_0))^{-1}\pdv{x}G(x_0, y_0) \] 
+    and all three parts are in $L(X, Y), L(Z, Y), L(X, Z)$ correspondingly.
+\end{thr}
+
+\begin{proof}
+    \[ G(x, y) = G(x_0, y_0) + \pdv{x}G(x_0, y_0)(x-x_0) + \pdv{y}G(y - y_0) + o(\norm{x - x_0} + \norm{y - y_0}) \] 
+    \[ y = f(x): 0 = G(x, f(x)) = \pdv{x}G(x_0, y_0)(x-x_0) + \pdv{y}G(f(x) - f(x_0)) + o(\norm{x - x_0} + \norm{f(x) - f(x_0)}) \] 
+    Divide by $\pdv{y}G(x_0, y_0)$:
+    \[ f(x) - f(x_0) = -(\pdv{y}G(x_0, y_0))^{-1} \pdv{x}G(x_0, y_0) (x - x_0) + (\pdv{y}G(x_0, y_0))^{-1}(o(\dots)) \] 
+    Let $C_1 = \norm{(\pdv{y}G(x_0, y_0))^{-1}} \norm{\pdv{x}G(x_0, y_0)}, C_2 = \norm{\pdv{y}} \norm{(\pdv{y}G(x_0, y_0))^{-1}}, \varepsilon \to 0 \text{ from } o(\dots)$:
+    \[ \norm{y - y_0} = C_1 \norm{x - x_0} + C_2 \varepsilon (\norm{x - x_0} + \norm{y - y_0}) \] 
+\end{proof}
+
+\begin{thr}[Corollary] 
+    If $G$ is $k$ times differentiable in a nenighborhood, then $f$ is too.
+\end{thr}
+
+\begin{thr}[Inverse function theorem]
+    $Y$ --- complete, $F: Y \to X, F(y_0) = x_0, \exists \dd{F}$ in a nenighborhood, $\exists (\dd{F}\/(y_0))^{-1} \in L(X, Y)$ \\ 
+    then exist nenighborhoods $U, V: x_0 \in U, y_0 \in V$ such that $F: V \to U$ --- bijection and
+    \[ (\dd{F^{-1}})(x_0) = (\dd{F}\/(y_0))^{-1} \]  
+\end{thr}
+\begin{proof}
+    \[ G: X \times Y \to X: G(x, y) = x - F(y) \]
+    It's suitable for Th. 1:
+    \[ \pdv{y} G\/(x_0, y_0) = -dd{F}, G(x_0, y_0) = 0 \]
+    Then by using it we get $f(x)$:
+    \[ \exists U, V \forall x \in U, y \in V : x = F(y) \leftrightarrow G(x, y) = 0 \leftrightarrow y = f(x) \]
+    Now it's already a map and even an injection, but we want to make $V = F(U)$ to make it a bijection. And we need $y_0$ to be internal in it.
+    \[ \dd{f}\/(x_0) = -(\pdv{y} G(x_0, y_0))^{-1} \pdv{x}\/G(x_0, y_0) = (\dd{F}\/(y_0))^{-1} \]
+    \[ \exists (\dd{f}\/(x_0))^{-1} = \dd{F}\/(y_0) \in L(Y, X) \] 
+    So for any point close to $y_0$ its preimage is close to $x_0$, and $y_0$ is internal in $F(U)$.
+    Now $f$ and $F$ are mutually inverse and $V = F(U), U = f(V)$, so they are bijections.
+\end{proof}
+\end{document}

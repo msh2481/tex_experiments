@@ -3,8 +3,9 @@
 % Cyrillic support
 \usepackage{polyglossia}
 \setmainfont{XCharter}
-% \usepackage{xcharter-otf}
-\setlength{\parindent}{0pt}
+\usepackage{xcharter-otf}
+\usepackage{parskip}
+
 % Images
 \usepackage[dvips,xetex]{graphicx}
 \graphicspath{ {./data/} }
@@ -19,7 +20,8 @@
 	urlcolor=cyan
 }
 % Math environments
-\usepackage{amsthm,amssymb}
+\usepackage{amsthm}
+% \usepackage{amssymb}
 \newtheorem{thr}{Th.}
 \newtheorem{alg}{Alg.}
 % One-symbol defines with mathbb

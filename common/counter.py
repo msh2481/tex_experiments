@@ -1,9 +1,11 @@
-from os import listdir, path, system
+from os import chdir, listdir, path, system
 from random import choices
 from string import ascii_letters, digits
 
+chdir('tex_experiments')
 system('rm -rf _minted* *.aux *.fls *.log *.out *.fdb_latexmk *.synctex.gz *.xdv')
 filenames = lambda d: map(lambda it: path.splitext(it)[0], listdir(d))
+
 used = set(filenames('.')) | set(listdir('./common')) | set(listdir('./data'))
 print(used)
 alphabet = ascii_letters + digits + '-_'
