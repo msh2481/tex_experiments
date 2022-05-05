@@ -15,3 +15,5 @@ while True:
     if number not in used:
         print(number, '.tex', sep='')
         break
+
+# for a in *.tex; do xelatex -shell-escape $a; done
