@@ -1,0 +1,18 @@
+\input{common/header}
+\title{Gamilton-Cayley theorem}
+\author{}
+\date{08 May 2022}
+\begin{document}
+\maketitle
+
+Assume $K$ is algebraicaly closed, but it isn't necessary.
+\begin{thr} $\chi_A(A) = 0$ \end{thr}
+$e$ --- Jordan basis for $A$, $J = [A]_e^e$ (i.e. $A$ in $e$).
+Want to show that $\chi_A(J) = 0$ as a matrix, and it's enough to 
+show that each Jordan block is annihilated.
+\[ \chi_A(t) = \pm \prod (t - \lambda_i)^\alpha_i \]
+Note that $\alpha_i$ is the sum of blocks sizes with $\lambda_i$ eigenvalue, so it's
+not less than any of them.
+Now consider a block with size $k$ and eigenvalue $\lambda_i$:
+\[ \chi_A(J_k(\lambda_i)) = (J_k(\lambda_i) - \lambda_i)^{\alpha_i} \prod (\dots) = 0 \]
+\end{document}

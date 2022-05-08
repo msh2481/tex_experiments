@@ -1,0 +1,26 @@
+\input{common/header}
+\title{Geometry in analysis}
+\author{}
+\date{07 May 2022}
+\begin{document}
+\maketitle
+
+\section*{Surfaces}
+
+Surface can be given by a function ($U$ is usually open here):
+\[ (x_1 \dots x_{n-1}) \in U \subset \R^{n-1}, f: U \to \R, 
+\Gamma_f = \{ (x, y) \in \R^n \mid x \in U, y = f(x) \} \]
+
+Coordinate lines are the images of sets $x_i = C, \forall i \in [n-1], C \in R$.
+
+If we have path $\gamma$ in $U$ we can project it to the surface as $(\gamma, f \circ \gamma)$.
+
+If $f$ is smooth at $x$ we can consider $y(x + h) = f(x) + \dd{f}\/(x)(h)$ and call it 
+affine tangent space. And without $f(x)$ it's tangent space. Tangent vectors are those lying
+in tangent space. Also these vectors are those being tangent (at $x$) to some curve in 
+the surface.
+
+Normal to the surface is $\bar n(x) = \begin{pmatrix}\nabla f(x)\\ -1\end{pmatrix}$.
+
+And $f: \R^n \to \R^m$ are also possible.
+\end{document}

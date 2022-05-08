@@ -1,0 +1,144 @@
+\input{common/header}
+\title{Bilinear and quadratic forms}
+\author{}
+\date{08 May 2022}
+\begin{document}
+\maketitle
+
+\subsection{Bilinear form}
+$h: V \times V \to K$ where $V$ is a vector space and $h$ is polylinear
+is called bilinear form.
+
+As usually, bilinear form is characterized by $a_{i,j} = h(e_i, e_j)$ which
+is called the matrix of $h$ in basis $e$.
+Here is how to evaluate $h$ through $A$:
+\[ h(u, v) = [u]_e^T A [v]_e \] 
+
+\subsubsection*{Use cases}
+
+o Dot product: $x, y \mapsto \sum x_i y_i $
+
+o Convolution?: $f, g \mapsto \int_0^1 f(x)g(x)w(x) \dd{x}$
+
+\subsection*{Symmetricity}
+$\forall v, u: h(u, v) = h(v, u) \then h$ --- symmetric.
+It's equivalent to $A$ being symmetric.
+
+
+Examples of assymetricity:
+
+o Something with $\C$: $x, y \mapsto \bar x y$
+
+o Another Convolution (it's usually antisymmetric):
+$ f, g \mapsto \int_0^1 f'(x)g(x) \dd{x}$
+
+\subsection*{Positive definite form}
+\[ \forall x \ne 0: h(x, x) > 0 \]  
+
+\subsubsection*{Use cases}
+
+It allows decomposition into a direct sum by taking orthogonal vectors.
+
+\begin{df} $x \perp y \iff h(x, y) = 0$ \end{df}
+\begin{df}[Orthogonal complement] $U \le V, U^\perp = \{ x \in V \mid \forall y \in U x \perp y \} $
+\end{df}
+
+\begin{thr}
+    $h > 0$ --- symmetric bilinear, $U \le V$ then $V = U \oplus U^\perp$
+\end{thr}
+\begin{proof}
+
+    1. Suppose $0 \ne x \in U \cap U^\perp$. Then $x \ne 0 \then h(x, x) > 0$,
+    but $x \in U \cap U^\perp \then h(x, x) = 0$.
+
+    2. Now let's show $\dim U + \dim U^\perp = \dim V$. Consider what equatioins define $U^\perp$:
+    \[ \forall y \in U: h(x, e_i) = 0 \]
+    Here $e$ is the basis of $U$, and it's enough to check only with basis elements.
+    So we have not more (they might be dependent, though they aren't)
+     than $\dim U$ equations. So $\dim U^\perp \ge \dim V - \dim U$.
+\end{proof}
+
+\subsection*{Quadratic form}
+\begin{df} $q: V \to K$ which is a homogenous quadratic polynomial in every basis.\end{df}
+
+For $q(x) = \sum\limits_{i\le j} b_{i,j}x_i x_j$ let's define $A$ this way:
+\[ a_{i,j} = \begin{cases}
+    \frac{b_{i,j}}{2}, i < j\\
+    \frac{b_{j,i}}{2}, i > j\\
+    b_{i,j}, i = j\\
+\end{cases} \]
+
+Now, both symmetric bilinear forms and quadratic forms both correspond to symmetric matrices,
+so they correspond to each other, and mapping is very simple: $h(x, y) = \frac{q(x + y) - q(x) - q(y)}{2}$.
+
+\subsection*{Change of basis}
+Suppose $h$ is $x^T A X$ in $e$ and $y^T B y$ in $f$, then:
+\[ x^T A x = (Cy)^T A Cy = y^T (C^T A C) y, C = [id]^f_e \] 
+
+Note that if we find an orthogonal basis than $A$ will be a diagonal matrix.
+
+\begin{thr}
+    $q: V \to K, \exists e$ in which $A$ (the matrix of q) will be diagonal.
+\end{thr}
+\begin{proof}
+    Here $a_{ij} = a_{ji}$:
+    \[ q(x) = \sum a_{ij} x_i x_j = a_{11}(x_1 + \sum \frac{a_{1j}}{a_{11}})^2 + q(x_{2\dots n}) - p(x_{2\dots n}) \]
+    Where:
+    \[ p(x_{2\dots n}) = \sum\limits_{j\ge 2} \frac{a_{1j}^2}{a_{11}}\]
+    Then we continue to extract squares from $q - p$ on $x_{2\dots n}$ and the first basis element is:
+    \[ e_1 = x_1 + \sum \frac{a_{1j}}{a_{11}} x_i \]
+    Final transition matrix will be upper-triangular with ones on the main diagonal, so it will be nondegenerate and give
+    a basis.
+    If $a_{11} = 0$ we can swap this row with another. If all $a_{ii} = 0$, take some $i, j: a_{ij} \ne 0$ and go to 
+    $x'_i, x'_j = x_i + x_j, x_i - x_j$, there will appear a difference of squares.
+\end{proof}
+
+We want to compute the main diagonal of matrix after this process.
+\begin{thr} 
+    $q(x) = x^T A x, d_i \ne 0$ --- principal minors (i.e. $\det A[:i, :i]$).
+
+    The main diagonal will be $\frac{d_i}{d_{i-1}}$, where $d_0 \stackrel{def}{=} 0$
+    (i.e. they won't change).
+\end{thr}
+\begin{proof}
+    It's enough to proof that multiplying $A \in M_n(K)$ by $C \in UT_n(K)$ with ones on
+    the main diagonal doesn't change it's pricipal minors.
+
+    Actually, we consider only top-left $k\times k$ blocks and find the determinant of 
+    their product. But the determinant of $UT_n$ with ones on the diagonal is $1$, so the product is equal 
+    to the original determinant.
+
+    Now we need to show, that on each iteration $a_{ii} \ne 0$ so that only the main 
+    branch of the algorithms works, otherwise transition matrices wouldn't have the right form.
+    
+    Consider the $k$-th step of the algorithm:
+    \[ A^{(k)} = \begin{pmatrix}
+        \mqty{\dmat{c_1, \dots, c_k}} & \mqty{\zmat{3}{2}} \\
+        \mqty{\zmat{2}{3}} & \mqty{x & \dots \\ \dots & \dots} \\
+    \end{pmatrix} \]
+    Here $x = a_{k+1,k+1} \ne 0$, otherwise the $(k+1)$-th minor would be zero.
+    More precisely, $x = \frac{d_{k+1}}{d_k}$.
+\end{proof}
+
+\begin{thr}[LU decomposition from the diagonalized form]
+    After the process from the previous theorem we get $A = C^T D C$,
+    where $C \in UT_n(K)$ with ones on the diagonal, $D$ --- diagonal.
+\end{thr}
+
+\subsection*{Real case}
+By scaling the basis elements we can get $q(x) = \sum_{i=1}^k x_i^2 - \sum_{k+1}^l x_i^2$. 
+\begin{df} $(k, l)$ or simply $k - l$ is called signature \end{df}
+\begin{thr}
+    $k = \max \{ \dim U \mid U \le V, q|_U > 0 \} $
+\end{thr}
+\begin{proof}
+    If $q(x) = \sum_{i=1}^k x_i^2 - \sum_{k+1}^l x_i^2$ is true for some $(k, l)$, then 
+    $\max \{ \dim U \mid U \le V, q|_U > 0 \} \ge k$, 
+    because we can take $\langle e_1 \dots e_k \rangle$.
+
+    Now suppose we found $U \le V: \dim U \ge k + 1$ and $q|_U > 0$. Also 
+    consider $W = \langle e_{k+1} \dots e_n \rangle$. We know $q|_W < 0$ and 
+    $U \cap W \ne \{ 0 \}$ (from Grassman's formula). So we have a nonzero vector lying
+    in the both forms, which is a contradiction.
+\end{proof}
+\end{document}
