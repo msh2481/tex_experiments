@@ -5,7 +5,7 @@
 \begin{document}
 \maketitle
 
-\subsection{Bilinear form}
+\subsection*{Bilinear form}
 $h: V \times V \to K$ where $V$ is a vector space and $h$ is polylinear
 is called bilinear form.
 
@@ -29,7 +29,7 @@ Examples of assymetricity:
 
 o Something with $\C$: $x, y \mapsto \bar x y$
 
-o Another Convolution (it's usually antisymmetric):
+o Another convolution (it's usually antisymmetric):
 $ f, g \mapsto \int_0^1 f'(x)g(x) \dd{x}$
 
 \subsection*{Positive definite form}
@@ -137,8 +137,38 @@ By scaling the basis elements we can get $q(x) = \sum_{i=1}^k x_i^2 - \sum_{k+1}
     because we can take $\langle e_1 \dots e_k \rangle$.
 
     Now suppose we found $U \le V: \dim U \ge k + 1$ and $q|_U > 0$. Also 
-    consider $W = \langle e_{k+1} \dots e_n \rangle$. We know $q|_W < 0$ and 
+    consider $W = \langle e_{k+1} \dots e_n \rangle$. We know $q|_W \le 0$ and 
     $U \cap W \ne \{ 0 \}$ (from Grassman's formula). So we have a nonzero vector lying
     in the both forms, which is a contradiction.
+\end{proof}
+
+\begin{thr}[Stronger version of Silvester criterion]
+    $q(x) = x^T A x, A^T = A, d_i \ne 0, c_i = \frac{d_i}{d_{i-1}} \then l = $number of sign changes
+    in $1, d_1, d_2 \dots d_n$, because each negative element on the diagonal (in canonical form) changes the sign of this and 
+    next minors.
+\end{thr}
+
+\begin{thr} Following are equivalent:
+    \par\nopagebreak
+    1. $\forall i: d_i > 0$
+    \par\nopagebreak
+    2. $\exists C \in UT_n(\R), \det C \ne 0: A = C^TC$
+    \par\nopagebreak
+    3. $\exists C, \det C \ne 0: A = C^TC$
+    \par\nopagebreak
+    4. $q > 0$
+\end{thr}
+\begin{proof}
+    $1 \then 2$: We can find $A = C^T D C$, then $A = (C^T\sqrt{D}^T)(\sqrt{D}C)$
+    as they are positive.
+
+    $2 \then 3$: Trivial.
+
+    $3 \then 4$: $x^TC^TCx > 0$ because with $y = Cx$, $y^Ty \ge 0$ and $y \ne 0$
+    because $x \ne 0, \det C \ne 0$.
+
+    $4 \then 1$: Positive definite form being restricted on anything is still 
+    positive (semi)definite. And $k$-th principal minor is a restriction on $\langle e_1 \dots e_k \rangle$.
+    And it's determinant is nonzero because $A = C^T C$, where $|C| \ne 0$, so $|A| = |C|^2 > 0$.
 \end{proof}
 \end{document}

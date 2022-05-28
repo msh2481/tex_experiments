@@ -1,0 +1,47 @@
+\input{common/header}
+\title{}
+\author{}
+\date{16 May 2022}
+\begin{document}
+\maketitle
+
+$V$ --- Euclidean space. $L: V \to V$. We can transform it to a bilinear form in two ways:
+\[ \dotp{Lu, v} \text{ or } \dotp{u, Lv} \] 
+
+When these two are equal, $L$ is called self-adjoint (i.e. $L = L*$).
+
+\begin{df} Adjoint operator $L*$ for $L$ is the unique operator such that $\dotp{u, Lv} = \dotp{L*u, v}$ \end{df}
+
+\section*{Hermitian matrices}
+
+\begin{thr}
+    $A$ --- self-adjoint operator on $V$ then eigenvalues of $A$ are real.
+\end{thr}
+\begin{proof}
+Consider $(\lambda, v)$.
+\[ \dotp{v, Av} = \dotp{v, \lambda v} = \lambda \norm{v}^2 \] 
+\[ \dotp{v, Av} = \dotp{Av, v} = \dotp{\lambda v, v} = \bar \lambda \norm{v}^2 \]
+\[ \lambda = \bar \lambda \then \lambda \in \R \] 
+\end{proof} 
+
+\begin{thr}
+    $A$ --- self-adjoint operator, then exists orthonormal basis of its eigenvectors.
+\end{thr}
+\begin{proof}
+    Consider $(\lambda, v)$, and restrict $A$ on $\dotp{v}^\perp$. It's an invariant space, because 
+    $u \in \dotp{v}^\perp \then \dotp{Au, v} = \dotp{u, Av} = \dotp{u, \lambda v} = 0 $.
+    Now $A|_{\dotp{v}^\perp}$ is still self-adjoint, so we can continue to build the basis iteratively.
+\end{proof}
+
+\begin{thr}
+    If $Q$ is orthogonal $n \times n$ matrix on $\R$, its eigenvalues have absolute value 1.
+\end{thr}
+\begin{proof}
+    Let's work in $\bar Q^T Q = E_n$.
+    Again proof that $\dotp{v}^\perp$ is invariant. Then we have an orthonormal basis,
+    so in it $Q$ is a diagonal matrix, and from $\bar Q^T Q = E_n$ we get $\bar \lambda_i \lambda_i = 1$.
+\end{proof}
+
+\begin{df} $L$ is called normal when $LL* = L*L$. \end{df}
+
+\end{document}

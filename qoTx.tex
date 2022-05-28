@@ -1,0 +1,81 @@
+\input{common/header}
+\title{Chain line and squeeze maps}
+\author{}
+\date{19 May 2022}
+\begin{document}
+\maketitle
+
+\subsection*{Chain line}
+
+Suppose we have a chain from $(0, f_0)$ to $(1, f_1)$ with length $l$.
+\[ \begin{cases}
+    \Pi(f) = \int\limits_0^1 f(x)\sqrt{1 + (f'(x))^2} \dd{x} \to \min \\
+    \Phi(f) = \int\limits_0^1 \sqrt{1 + (f'(x))^2} \dd{x} = l \\
+    f(0) = f_0, f(1) = f_1
+\end{cases} \] 
+
+Let's apply Lagrange multipliers (here $h$ is possible variation and $f$ is a local minimum):
+\[ \exists \lambda \forall h: \partial_h (\Pi - \lambda \Phi)(f) = 0 \] 
+\[ (\Pi - \lambda \Phi)(f) = \int\limits_0^1 F(x, f(x), f'(x)) \dd{x}, F(x, u, v) = (u - \lambda)\sqrt{1 + v^2} \] 
+Euler-Lagrange equation:
+\[ \partial_2 F - \pdv{x} \partial_3 F = 0 \] 
+Because there is no $x$:
+\[ F - f' \partial_3 F = C \] 
+Let's check:
+\[ \partial_2 F f'  + \partial_3 F f'' - f'' \partial_3 F - f' \pdv{dx} \partial_3 F  = 0 \]
+
+Substitute $F$:
+\[ (f(x) - \lambda)\sqrt{1 + (f'(x))^2} - f'(x)(f(x) - \lambda)\frac{f'(x)}{\sqrt{1 + (f'(x))^2}} = C \] 
+\[ \frac{1}{1 + (f')^2} = \qty(\frac{C}{f(x) - \lambda})^2 \] 
+\[ 1 + (f')^2 = \qty(\frac{f - \lambda}{C})^2 \] 
+\[ f' = \sqrt{\frac{(f - \lambda)^2 - C^2}{C^2}} \]
+\[ \frac{f'}{\sqrt{(f - \lambda)^2 - C^2}} = \frac{1}{C} \] 
+\[ \int \frac{df}{\sqrt{(f-\lambda)^2 - C^2}} = \frac{x}{C} \] 
+\[ \ln(f - \lambda + \sqrt{(f - \lambda)^2 - C^2}) = \frac{x}{C} + C_1 \] 
+\[ f - \lambda = \cosh(\frac{x}{C} + C_1) \]
+
+\subsection*{Soap film}
+
+We have two rings: $x = 0, y^2 + z^2 = f_0^2$ and $x = 1, y^2 + z^2 = f_1^2$. Then
+\[ S(f) = \int\limits_0^1 2 \pi f(x) \sqrt{1 + (f'(x))^2} \dd{x} \] 
+It's just previous problem with $\lambda = 0$.
+
+\subsection*{Squeeze maps and differential equations}
+
+\begin{thr}
+    $(X, \rho)$ --- complete metric space, $U: X \to X$ --- squeeze map, i.e.
+    $\exists \gamma < 1 \forall x_1, x_2 \in X: \rho(U(x_1), U(x_2)) \le \gamma \rho(x_1, x_2)$ then 
+    $\exists! x_*: U(x_*) = x_*$.
+\end{thr}
+\begin{proof}
+    \[ x_0 \in X, x_{k+1} = U(x_k) \] 
+    \[ \rho(x_{k+1}, x_k) \le \gamma \rho(x_{k}, x_{k-1}) \le \gamma^2 \rho(x_{k-1}, x_{k-2}) \le gamma^k \rho(x_1, x_0) \] 
+    \[ \rho(x_m, x_n) \le \rho(x_1, x_0) \sum_{m-1}^{n} \gamma^k \le \frac{\gamma^n}{1-\gamma} \rho(x_1, x_0) \] 
+    So it's a Cauchy sequence and by completeness of $X$ it has a limit.
+    And $(x_{n+1} = U(x_n)) \to (x_* = U(x_*))$, here we used continuity of $U$, because it's a squeeze map.
+\end{proof}
+
+\begin{thr}
+    $(X, \rho)$ --- complete metric space, $U: X \to X$, and $\exists n: U^n$ --- squeeze map then  $\exists! x_*: U(x_*) = x_*$.
+\end{thr}
+\begin{proof} 
+    We have $x_*$ that is stationary for $U^n$. Now let's apply $U$ to it $n$ times. Then all those points are stationary for $U^n$,
+    and there at least two distinct if $U(x_*) \ne x_*$.
+\end{proof}
+
+Now consider a special case of first order ODE: 
+\[ f'(x) = A(x)f(x) + B(x), f \in C^1[a, b], f(a) = 0 \] 
+\[ U: f(x) \to \int\limits_a^x A(t)f(t) + B(t) \dd{t} \] 
+We want to find a stationary point for this map. Let's check $U^n$ in $X = \{ f \in C[a, b] \mid f(a) = 0 \}$:
+\[ \norm{ Uf_1 - Uf_2 } = \max\limits_{x \in [a, b]} \qty| \int\limits_a^x A(t)f_1(t) - A(t)f_2(t) \dd{t} | \]
+\[ \qty| \int\limits_a^x A(t)f_1(t) - A(t)f_2(t) \dd{t} | \le (b - a)\max |A| \norm{f_1 - f_2} \] 
+it works when $b - a \to 0$, but not in our case.
+
+For some time we'll forget about shift by $B(t)$:
+\[ U_0 f(x) = \int\limits_a^x A(t)f(t) \dd{t} \]
+\[ U_0^n f(x) = \int\limits_a^{x} A(t) \qty( \int\limits_a^{t_{n-1}} A(t) \qty( \dots \int\limits_a^{t_1} A(t) f(t) \dd{t} )) \] 
+\[ \norm{U_0^n (f_1 - f_2)} \le \norm{f_1 - f_2} \qty(\max |A|)^n \max \qty|\int \int \int \dots| \le \norm{f_1 - f_2} \qty(\max |A|)^n \frac{(b-a)^n}{n!} \]
+And now $U(f) - U(g) = U_0(f) - U_0(g)$, because $B(t)$ cancells at each iteration, so $U^n$ is also squeeze map. 
+Therefore we have $f_*(x) = \int\limits_a^x A(t)f_*(t) + B(t)\dd{t}$ and be default it's in $C[a,b]$, but if $A, B \in C^k[a, b]$ then $f_*(x) \in C^k[a,b]$.
+
+\end{document}

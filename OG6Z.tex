@@ -127,12 +127,18 @@ Now, consider $S$:
 \end{thr}
 
 \begin{proof}
-    \[ G(x, y) = G(x_0, y_0) + \pdv{x}G(x_0, y_0)(x-x_0) + \pdv{y}G(y - y_0) + o(\norm{x - x_0} + \norm{y - y_0}) \] 
-    \[ y = f(x): 0 = G(x, f(x)) = \pdv{x}G(x_0, y_0)(x-x_0) + \pdv{y}G(f(x) - f(x_0)) + o(\norm{x - x_0} + \norm{f(x) - f(x_0)}) \] 
-    Divide by $\pdv{y}G(x_0, y_0)$:
-    \[ f(x) - f(x_0) = -(\pdv{y}G(x_0, y_0))^{-1} \pdv{x}G(x_0, y_0) (x - x_0) + (\pdv{y}G(x_0, y_0))^{-1}(o(\dots)) \] 
-    Let $C_1 = \norm{(\pdv{y}G(x_0, y_0))^{-1}} \norm{\pdv{x}G(x_0, y_0)}, C_2 = \norm{\pdv{y}} \norm{(\pdv{y}G(x_0, y_0))^{-1}}, \varepsilon \to 0 \text{ from } o(\dots)$:
-    \[ \norm{y - y_0} = C_1 \norm{x - x_0} + C_2 \varepsilon (\norm{x - x_0} + \norm{y - y_0}) \] 
+    \[ G(x, y) = G(x_0, y_0) + \pdv{x}G(x_0, y_0)(x-x_0) + \pdv{y}G(x_0, y_0)(y - y_0) + o\qty(\norm{x - x_0} + \norm{y - y_0}) \]
+    Consider $y = f(x)$ (and $G(x, y) = 0$ now):
+    \[ 0 = \pdv{x}G(x_0, y_0)(x-x_0) + \pdv{y}G(x_0, y_0)\qty(f(x) - f(x_0)) + o\qty(\norm{x - x_0} + \norm{f(x) - f(x_0)}) \] 
+    Divide by $\pdv{y}G(x_0, y_0)$ and find $f(x) - f(x_0)$:
+    \[ f(x) - f(x_0) = -\qty(\pdv{y}G(x_0, y_0))^{-1} \qty(\pdv{x}G(x_0, y_0) (x - x_0) + o\qty(\norm{x - x_0} + \norm{f(x) - f(x_0)})) \] 
+
+    Now we need to show that $o(\dots)$ is small enough and $f$ is continuous:
+
+    Let $C_1 = \norm{\qty(\pdv{y}G(x_0, y_0))^{-1}} \norm{\pdv{x}G(x_0, y_0)}, C_2 = \norm{\qty(\pdv{y}G(x_0, y_0))^{-1}}, \eps \to 0 \text{ from } o(\dots)$:
+    \[ \norm{y - y_0} \le C_1 \norm{x - x_0} + C_2 \eps \qty(\norm{x - x_0} + \norm{y - y_0}) \] 
+    Then for $\eps < C_2^{-1}$:
+    \[ \norm{y - y_0} \le \frac{C_1 + C_2 \eps}{1 - C_2 \eps} \norm{x - x_0} \]
 \end{proof}
 
 \begin{thr}[Corollary] 
@@ -147,7 +153,7 @@ Now, consider $S$:
 \begin{proof}
     \[ G: X \times Y \to X: G(x, y) = x - F(y) \]
     It's suitable for Th. 1:
-    \[ \pdv{y} G\/(x_0, y_0) = -dd{F}, G(x_0, y_0) = 0 \]
+    \[ \pdv{y} G\/(x_0, y_0) = -\dd{F}, G(x_0, y_0) = 0 \]
     Then by using it we get $f(x)$:
     \[ \exists U, V \forall x \in U, y \in V : x = F(y) \leftrightarrow G(x, y) = 0 \leftrightarrow y = f(x) \]
     Now it's already a map and even an injection, but we want to make $V = F(U)$ to make it a bijection. And we need $y_0$ to be internal in it.

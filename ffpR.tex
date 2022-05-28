@@ -1,0 +1,39 @@
+\input{common/header}
+\title{Orthogonal matrices and least squares}
+\author{}
+\date{16 May 2022}
+\begin{document}
+\maketitle
+
+\begin{df} $Q \in M_n(\R)$ --- orthogonal iff the columns form an 
+    orthonormal basis. \end{df}
+It's equivalent to $Q^TQ = E_n$.
+
+\subsection*{Properties}
+1. $\norm{Qx} = \norm{x^TQ^TQx} = x^Tx = \norm{x}$
+
+2. Also it preserves scalar products.
+
+3. All orthogonal matrices preserve distances and zero, and in other direction it's true too.
+
+4. All transition matrices between orthonormal bases are orthogonal.
+
+\section*{Least squares method}
+
+\[ x = \arg \min\limits_{x \in \R^n} \norm{Ax - b} \]
+
+\[ \dotp{Ax - b, Ax - b} = x^TA^TAx - x^TA^Tb  - b^TAx - b^Tb \] 
+
+We can transpose $1\times 1$ matrices, so $x^TA^Tb = b^TAx$:
+
+\[ x^TA^TAx - 2x^TA^Tb \to \min \]
+
+After extracting the full square:
+
+\[ x = (A^T A)^{-1} A^T b \] 
+
+Or if $A = QR$:
+\[ Rx = Q^T b \] 
+And it can be solved in $O(n^2)$.
+
+\end{document}

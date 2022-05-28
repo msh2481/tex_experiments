@@ -1,0 +1,121 @@
+\input{common/header}
+\title{Conditional extrema}
+\author{}
+\date{12 May 2022}
+\begin{document}
+\maketitle
+
+\begin{df} $f: X \to \R, M \subset X, x_0 \in M$ --- conditional local minimum iff
+$\exists \eps > 0: f(x_0) \leq f(x) \forall x \in B_{\eps}(x_0) \cap M$ \end{df}
+
+Usually $M$ is defined by some condition, e.g. level set of a function, i.e. 
+\[ \Phi: X \to \R, M = \{ x \in X \mid \Phi(x) = 0 \} \] 
+
+Also $x_0$ should be an inner point, otherwise there are no differentials.
+
+\subsection*{$\R^m$ case}
+
+\[ f: \R^{m+n} \to \R, \Phi: \R^{m+n} \to \R \] 
+\[ M = \{ z \in X \mid \Phi(z) = 0 \}, z \in M \iff \begin{cases}
+    \Phi_1(z) = 0 \\
+    \dots \\ 
+    \Phi_m(z) = 0 \\
+\end{cases} \]
+
+\[ \dd{\Phi(z)} = \qty( \pdv{\Phi_i}{z_j} ) \]
+
+\begin{df} M is nondegenerate in $z$ if $\rank \dd{\Phi(z)} = m$. \end{df}
+
+In that case let's choose $m$ independent
+columns and put them in the end. First $n$ coordinates now are called $x$ and last $m$ --- $y$.
+
+\[ \dd{\Phi(z)} = \qty( \partial_x \Phi(x, y) \partial_y \Phi(x, y)) \]
+
+By implicit function theorem [\go{OG6Z}] in a neighborhood $y = \varphi(x)$.
+Now $z = (x_0, y_0)$ is a conditional minimum iff $x$ is a minimum of $\bar f(x) = f(x, \varphi(x)) \then \dd{\bar f(x_0)} = 0$.
+
+\[ \partial_x f(x_0, \varphi(x_0)) + \partial_y f(x_0, \varphi(x_0)) \dd{\varphi(x_0)} = 0 \in \R^n \]
+So it has a chance of giving a solution (because it removes $n$ degrees of freedom).
+
+\[ \forall x \in B(x_0, \eps): \Phi(x, \varphi(x)) = 0 \then \partial_x \Phi(x_0, \varphi(x_0)) + \partial_y \Phi(x_0, \varphi(x_0)) \dd{\varphi(x_0)} = 0 \] 
+
+\[ \dd{\varphi(x_0)} = (\partial_y \Phi(x_0, \varphi(x_0)))^{-1} \partial_x \Phi(x_0, \varphi(x_0)) \] 
+\[  \partial_x f(x_0, y_0) + \partial_y f(x_0, y_0)  (\partial_y \Phi(x_0, \varphi(x_0)))^{-1} \partial_x \Phi(x_0, \varphi(x_0)) = 0  \]
+
+\[ \lambda = \partial_y f(x_0, y_0)  (\partial_y \Phi(x_0, \varphi(x_0)))^{-1} \in (\R^m \to \R)\] 
+
+\[ \begin{cases}
+    \partial_x f(x_0, y_0) + \lambda \partial_x \Phi(x_0, \varphi(x_0)) = 0\\ 
+    \partial_y f(x_0, y_0) + \lambda \partial_y \Phi(x_0, \varphi(x_0)) := 0\\
+\end{cases} \]
+
+Lagrange test:
+\[ \begin{cases}
+    \dd{f}\/(z_0) - \lambda \dd{\Phi}\/(z_0) = 0\\
+    \Phi(z_0) = 0\\
+\end{cases} \]
+
+There are $m + n$ indeterminates in $z$ and $m$ in $\lambda$. But also there are $2m + n$ equations, so 
+they might be enough to find $z, \lambda$.
+
+\begin{thr} If $z_0$ is a local conditional extremum of $f$ when $\Phi = 0$ and $\Phi$ is nondegenerate in $z$ then 
+    $\exists \lambda \in \R^m: \dd{(f - \lambda \Phi)(z_0)} = 0 $.
+\end{thr}
+
+\subsection*{Geometric meaning}
+If $z_0$ is a local conditional minimum then value should increase along every direction in the surface.
+$ \dd{f(z_0)} h = 0 $ when $h$ is tangent to the surface.
+
+\[ \forall h \perp L = \dotp{\nabla \Phi_1, \dots \nabla \Phi_m}: \nabla f \perp h \] 
+Because $(L^\perp)^\perp = L$ (in finite dimensional case, to prove do something with bases):
+\[ \nabla f \in L \then \exists \nabla_1 \dots \nabla_m: \nabla f(z_0) = \lambda_1 \nabla \Phi_1(z_0) + \dots + \lambda_m \nabla \Phi_m(z_0) \]
+
+\subsection*{Example: quadratic form on a sphere}
+
+\[ \R^m, f(x) = \dotp{Ax, x}, A = A^T, Phi(x) = \norm{x}^2 - 1 = \dotp{x, x} - 1 \]
+\[ \dd{f(x)} =  2\dotp{A \dd{x}, x}, \dd{\Phi(x)} = 2\dotp{x, \dd{x}} \] 
+\[ \dd{f - \lambda \Phi} = 0 \then Ax = \lambda x \] 
+Suppose we found $\lambda_1, v_1$:
+\[ x \perp v_1 \then \lambda_1 \dotp{x, v_1} \then \dotp{x, Av_1} \then \dotp{Ax, v_1} \]
+So consider $A_1 = A|_{\dotp{v_1}^\perp}, f_1 = f|_{\dotp{v_1}^\perp}$ and solve it with more restraints.
+
+\subsection*{Didona's task}
+
+\[ f(0) = f(1) = 0, J[f] = \int_0^1 f(x) dx \to \max, \Phi[f] = \int_0^1 \sqrt{1 + (f')^2} dx - l = 0 \]
+
+Let's use Lagrange multipliers with partial derivatives:
+\[ \exists \lambda \forall h, h(0) = h(1) = 0: \partial_h (J - \lambda \Phi)(f) = 0 \] 
+
+\begin{proof}
+Suppose $\exists h_0: \partial_{h_0} \Phi(f) \ne 0$. Choose $h$:
+\[ g(t, s) = \Phi[f + th + sh_0] \] 
+Why $\exists s: g(t, s) = 0$? If $\partial_s g(0, 0) \ne 0$ we have it from implicit function theorem.
+\[ \partial_s \Phi[f + th + sh_0] = \dd{\Phi[f + th + sh_0]} h_0 = \partial_{h_0} (f + th + sh_0) \]
+\[  \partial_{h_0} \Phi(f) \ne 0 \] 
+so there is some $s(t)$ in a neighborhood.
+
+\[ \varphi(t) = J(f + th = s(t)h_0) \then 0\text{ --- maximum point. }\] 
+\[ \varphi'(0) = 0 \] 
+\[ \partial_{h + s'(0) + h_0}J(f) = 0 \] 
+\[ \partial_h J(f) + s'(0) \partial_{h_0} J(f) = 0 \] 
+And from $\Phi[f + th + s(t)h_0] = 0$:
+\[ \partial_h \Phi(f) + s'(0) \partial_{h_0} \Phi(f) = 0 \]
+As in Lagrange method:
+\[ \partial_h J(f) - \lambda \partial_h \Phi(f) = 0, \lambda \frac{\partial_{h_0} J(f)}{\partial_{h_0} \Phi(f)} \]
+\end{proof}
+
+\[ \partial_h (J - \lambda \Phi)(f) = 0 \] 
+\[ \partial_h (\int_0^1 (f - \lambda\sqrt{1 + (f')^2}) dx) = 0 \]
+\[ \partial_2 F(...) - \frac{\dd}{\dd{x}} \partial_3 F(...) = 0 \] 
+\[ 1 - \frac{\dd}{\dd{x}}(-\lambda \frac{f'}{\sqrt{1 + (f')^2}}) = 0 \] 
+\[ -\lambda \frac{f'}{\sqrt{1 + (f')^2}} = x + C \] 
+\[ \frac{(f')^2}{1 + (f')^2} = \frac{x + C}{\lambda}^2 \]
+\[ \frac{1}{(f')^2} = \frac{\lambda^2}{(x+C)^2} - 1 \]
+\[ f'(x) = \sqrt{\frac{(x+C)^2}{\lambda^2 - (x+C)^2}} \] 
+\[ f(x) = \int \frac{x + c}{\sqrt{\lambda^2 - (x+c)^2}} \] 
+With $t = x + c$ we get:
+\[ f(x) = \sqrt{\lambda^2 - (x+C)^2} + C_1 \] 
+So it's a part of a circle with center in $(-\frac12, ...)$ and radius $\lambda$.
+
+
+\end{document}

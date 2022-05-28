@@ -4,6 +4,7 @@
 \usepackage{polyglossia}
 \setmainfont{XCharter}
 \usepackage{xcharter-otf}
+\usepackage{fullpage}
 \usepackage{parskip}
 
 % Images
@@ -34,6 +35,8 @@
 \providecommand{\then}{\Rightarrow}
 \providecommand{\from}{\Leftarrow}
 \providecommand{\iff}{\Leftrightarrow}
+\providecommand{\dotp}[1]{\langle #1 \rangle}
+\providecommand{\eps}{\varepsilon}
 
 \renewcommand{\N}{\mathbb N}
 \renewcommand{\Z}{\mathbb Z}
@@ -47,6 +50,11 @@
 \renewcommand{\then}{\Rightarrow}
 \renewcommand{\from}{\Leftarrow}
 \renewcommand{\iff}{\Leftrightarrow}
+\renewcommand{\dotp}[1]{\langle #1 \rangle}
+\renewcommand{\eps}{\varepsilon}
+
+\DeclareMathOperator{\proj}{proj}
+\newcommand{\vct}{\mathbf}
 
 \renewcommand{\le}{\leqslant}
 \renewcommand{\ge}{\geqslant}

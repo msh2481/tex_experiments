@@ -1,0 +1,44 @@
+\input{common/header}
+\title{Euclidean space and Gram-Schmidt process}
+\author{}
+\date{10 May 2022}
+
+\begin{document}
+\maketitle
+
+\subsection*{Euclidean space}
+
+\begin{df} Euclidean space is $V, \langle . \rangle$, where
+    $V$ is a vector space over $\R$ and $\langle . \rangle$ is a bilinear form
+    called dot product. \end{df}
+
+What we already know about it:
+\[
+    \norm{x} = \sqrt{\dotp{x, x}},\
+    \rho(x, y) = \norm{x - y},\
+    |\dotp{x, y}| \le \norm{x}\norm{y} \]
+Also we can define cosine of angle between vectors:
+\[ -1 \le \frac{\dotp{x, y}}{\norm{x}{y}} \le 1 \]
+And projection:
+\[ \proj_{v}: V \to \dotp{v}, \proj_{v}{x} = \frac{v}{\norm{v}} \norm{x} \cos \alpha =
+    \frac{\dotp{x, v}}{\norm{v}^2} v \]
+Or projection on $\dotp{v}^\perp$ by subtracting: $x - \proj_vx$.
+
+\subsection*{Gram-Schmidt process}
+
+\begin{df} Set of vectors $e_i$ in a Euclidean space
+    is called orthnormal if $e_i \perp e_j$ and $\norm{e_i} = 1$ \end{df}
+
+\begin{df} Orthogonalization is a process which for a set of vectors
+    $e_i$ gives another set $f_i$, that are orthnormal and
+    $\forall k: \dotp{e_1 \dots e_k} = \dotp{f_1 \dots f_k}$ \end{df}
+
+Necessarily $f_1 = \frac{e_1}{\norm{e_1}}$, because 
+$\dotp{f_1} = \dotp{e_1}, \norm{f_1} = 1$.
+
+Now, $f_i \perp \dotp{e_1\dots e_{i-1}} \iff f_i \perp \dotp{f_1 \dots f_{i-1}}$.
+Also it should contain something about $e_i$ in it, so we can just subtract all projections: 
+\[f_i = e_i - \sum \proj_{f_j}{e_i}\]
+Then just normalize it.
+
+\end{document}
